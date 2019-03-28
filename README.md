@@ -1,3 +1,20 @@
+# TDT4265 - Pix2Pix Starter code 
+
+## How to run
+
+```bash
+python3 gta_download.py
+```
+This will save images to gta_data
+
+To start the pix2pix model training, you can run
+
+```bash
+python3 train.py --model pix2pix --dataroot gta_data
+```
+
+Now a visdom server will open at the address: localhost:8097
+
 <img src='imgs/horse2zebra.gif' align="right" width=384>
 
 <br><br><br>
