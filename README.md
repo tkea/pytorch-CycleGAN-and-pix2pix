@@ -14,6 +14,11 @@ python3 train.py --model pix2pix --dataroot gta_data
 ```
 
 Now a visdom server will open at the address: localhost:8097
+## After ~ 2 minutes training
+
+<img src="2min_training_example.png">
+
+---
 
 <img src='imgs/horse2zebra.gif' align="right" width=384>
 
