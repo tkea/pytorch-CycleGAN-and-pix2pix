@@ -58,7 +58,7 @@ class Pix2PixImprovedModel(BaseModel):
 
         if self.isTrain:  # define a discriminator; conditional GANs need to take both input and output images; Therefore, #channels for D is input_nc + output_nc
             self.netD = networks.define_D(opt.input_nc + opt.output_nc, opt.ndf, opt.netD,
-                                          opt.n_layers_D, 'none', opt.init_type, opt.init_gain, self.gpu_ids)
+                                          opt.n_layers_D, 'batch', opt.init_type, opt.init_gain, self.gpu_ids)
 
         if self.isTrain:
             # define loss functions
