@@ -58,7 +58,7 @@ class Pix2PixImprovedModel(BaseModel):
 
         if self.isTrain:  # define a discriminator; conditional GANs need to take both input and output images; Therefore, #channels for D is input_nc + output_nc
             self.netD = networks.define_D(opt.input_nc + opt.output_nc, opt.ndf, opt.netD,
-                                          opt.n_layers_D, 'batch', opt.init_type, opt.init_gain, self.gpu_ids)
+                                          opt.n_layers_D, 'instance', opt.init_type, opt.init_gain, self.gpu_ids)
 
         if self.isTrain:
             # define loss functions
@@ -97,7 +97,7 @@ class Pix2PixImprovedModel(BaseModel):
         pred_real = self.netD(real_AB)
         self.loss_D_real = self.criterionGAN(pred_real, True)
         # gradient penalty loss as defined by wgan-gp
-        self.loss_GP, gradients = networks.cal_gradient_penalty(self.netD, real_AB, fake_AB, self.device)
+        self.loss_GP, gradients = networks.cal_gradient_penalty(self.netD, self.real_A, self.real_B, self.device)
         # combine loss and calculate gradients
         self.loss_GP.backward(retain_graph=True)
         self.loss_D = (self.loss_D_fake + self.loss_D_real) * 0.5
