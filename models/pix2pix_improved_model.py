@@ -99,7 +99,8 @@ class Pix2PixImprovedModel(BaseModel):
         # gradient penalty loss as defined by wgan-gp
         self.loss_GP, gradients = networks.cal_gradient_penalty(self.netD, real_AB, fake_AB, self.device)
         # combine loss and calculate gradients
-        self.loss_D = self.loss_D_fake + self.loss_D_real + self.loss_GP
+        self.loss_GP.backward(retain_graph=True)
+        self.loss_D = self.loss_D_fake + self.loss_D_real
         self.loss_D.backward()
 
     def backward_G(self):
